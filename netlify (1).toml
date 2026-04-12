@@ -1,0 +1,57 @@
+# netlify.toml — Configuration de déploiement GATE 75
+# © 2026 Lesly Tech LLC
+
+[build]
+  publish = "."
+  command = "echo 'GATE 75 PWA — No build required'"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Headers de sécurité et PWA
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=*, microphone=*, geolocation=*"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# Service Worker — no cache
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Service-Worker-Allowed = "/"
+
+# Manifest — short cache
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "application/manifest+json"
+
+# HTML — no cache
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Assets — long cache
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# Redirects — SPA fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

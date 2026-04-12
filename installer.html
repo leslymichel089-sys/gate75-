@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#0a0a0f"/>
+<title>GATE 75 — Installer sur Mobile</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0a0a0f;--surface:#1a1a2e;--surface2:#22223a;--border:#2a2a4a;
+  --accent:#7c3aed;--accent2:#a855f7;--accent3:#06b6d4;--gold:#f59e0b;
+  --text:#e8e8f0;--text2:#9898b8;--text3:#5a5a7a;--success:#22c55e;
+  --font:'Syne',sans-serif;--mono:'Space Mono',monospace;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:0;
+  background:radial-gradient(ellipse 80% 50% at 20% 0%,rgba(124,58,237,0.15) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%,rgba(6,182,212,0.1) 0%,transparent 60%);
+  pointer-events:none;}
+
+.container{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:24px 20px 48px;}
+
+/* HERO */
+.hero{text-align:center;padding:40px 0 32px;}
+.hero-logo{width:80px;height:80px;background:linear-gradient(135deg,var(--accent),var(--accent3));
+  border-radius:20px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:24px;font-weight:700;color:#fff;
+  box-shadow:0 0 40px rgba(124,58,237,0.5);}
+.hero h1{font-size:36px;font-weight:800;margin-bottom:6px;}
+.hero h1 span{background:linear-gradient(90deg,var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;}
+.hero-desc{font-size:16px;color:var(--text2);line-height:1.6;max-width:340px;margin:0 auto;}
+
+/* BADGE */
+.badge-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:20px 0;}
+.badge{background:var(--surface2);border:1px solid var(--border);border-radius:20px;
+  padding:5px 12px;font-size:11px;font-family:var(--mono);color:var(--accent2);}
+
+/* MAIN CTA */
+.main-cta{background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border-radius:18px;padding:22px;text-align:center;margin:8px 0 24px;
+  box-shadow:0 0 40px rgba(124,58,237,0.4);}
+.main-cta .cta-label{font-size:11px;font-family:var(--mono);color:rgba(255,255,255,0.7);
+  letter-spacing:2px;margin-bottom:8px;text-transform:uppercase;}
+.main-cta h2{font-size:22px;font-weight:800;color:#fff;margin-bottom:6px;}
+.main-cta p{font-size:13px;color:rgba(255,255,255,0.8);margin-bottom:18px;}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;
+  background:#fff;color:var(--accent);font-weight:800;font-size:16px;
+  padding:14px 28px;border-radius:12px;text-decoration:none;
+  transition:transform 0.2s,box-shadow 0.2s;cursor:pointer;border:none;}
+.cta-btn:hover{transform:scale(1.04);box-shadow:0 8px 30px rgba(0,0,0,0.3);}
+.cta-btn span{font-size:22px;}
+
+/* METHODS */
+.section-title{font-size:13px;font-family:var(--mono);color:var(--text3);
+  letter-spacing:2px;text-transform:uppercase;margin:28px 0 14px;text-align:center;}
+
+.method-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:20px;margin-bottom:12px;position:relative;overflow:hidden;}
+.method-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent3));}
+.method-num{width:32px;height:32px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border-radius:8px;display:inline-flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;color:#fff;margin-bottom:12px;}
+.method-card h3{font-size:17px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.method-card p{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px;}
+.method-card .steps{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.method-card .steps li{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text2);line-height:1.5;}
+.method-card .steps li::before{content:'→';color:var(--accent2);flex-shrink:0;font-weight:700;}
+.method-card .note{background:var(--surface2);border:1px solid var(--border);border-radius:8px;
+  padding:8px 12px;font-size:11px;font-family:var(--mono);color:var(--accent3);margin-top:10px;}
+.method-card .action-link{display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;
+  text-decoration:none;margin-top:12px;transition:opacity 0.2s;}
+.method-card .action-link:hover{opacity:0.9;}
+
+/* COMPATIBILITY */
+.compat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+.compat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;}
+.compat-icon{font-size:28px;margin-bottom:8px;}
+.compat-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+.compat-status{font-size:11px;font-family:var(--mono);}
+.compat-status.ok{color:var(--success);}
+.compat-status.warn{color:var(--gold);}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px;}
+.feature-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:12px;text-align:center;}
+.feature-icon{font-size:22px;margin-bottom:5px;}
+.feature-label{font-size:11px;color:var(--text2);font-family:var(--mono);}
+
+/* QR */
+.qr-section{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:24px;text-align:center;margin-bottom:24px;}
+.qr-box{width:160px;height:160px;background:#fff;border-radius:12px;margin:0 auto 14px;
+  display:flex;align-items:center;justify-content:center;padding:8px;}
+.qr-box svg{width:100%;height:100%;}
+.qr-label{font-size:12px;color:var(--text2);font-family:var(--mono);}
+.qr-url{font-size:14px;font-weight:700;color:var(--accent2);margin-top:4px;}
+
+/* FOOTER */
+.page-footer{text-align:center;padding:24px 0;border-top:1px solid var(--border);margin-top:32px;}
+.page-footer p{font-size:11px;color:var(--text3);font-family:var(--mono);}
+.page-footer a{color:var(--accent2);text-decoration:none;}
+
+/* ALERT */
+.alert{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px;
+  padding:12px 14px;font-size:12px;color:var(--gold);margin-bottom:16px;display:flex;gap:8px;align-items:flex-start;}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-logo">G75</div>
+    <div class="hero-sub">Lesly Tech LLC · 2026</div>
+    <h1>GATE <span>75</span></h1>
+    <p class="hero-desc">IA créatrice de prompts & codes. Multilingue. Disponible sur mobile dès maintenant.</p>
+    <div class="badge-row">
+      <span class="badge">⚡ v2.0</span>
+      <span class="badge">🌐 7 langues</span>
+      <span class="badge">📱 PWA</span>
+      <span class="badge">🤖 Groq AI</span>
+    </div>
+  </div>
+
+  <!-- MAIN CTA -->
+  <div class="main-cta">
+    <div class="cta-label">🚀 Installation rapide</div>
+    <h2>Ouvrir GATE 75</h2>
+    <p>Accédez à l'application et installez-la directement sur votre écran d'accueil</p>
+    <a href="https://gate75.netlify.app" class="cta-btn" target="_blank">
+      <span>⚡</span> Ouvrir GATE 75
+    </a>
+  </div>
+
+  <!-- COMPATIBILITY -->
+  <div class="section-title">📱 Compatibilité</div>
+  <div class="compat-grid">
+    <div class="compat-card">
+      <div class="compat-icon">🤖</div>
+      <div class="compat-name">Android</div>
+      <div class="compat-status ok">✓ Pleinement supporté</div>
+    </div>
+    <div class="compat-card">
+      <div class="compat-icon">🍎</div>
+      <div class="compat-name">iPhone / iOS</div>
+      <div class="compat-status ok">✓ Safari requis</div>
+    </div>
+    <div class="compat-card">
+      <div class="compat-icon">🪟</div>
+      <div class="compat-name">Windows</div>
+      <div class="compat-status ok">✓ Chrome/Edge</div>
+    </div>
+    <div class="compat-card">
+      <div class="compat-icon">🖥️</div>
+      <div class="compat-name">Mac / Linux</div>
+      <div class="compat-status ok">✓ Chrome/Firefox</div>
+    </div>
+  </div>
+
+  <!-- ANDROID METHOD -->
+  <div class="section-title">🤖 Installation Android</div>
+
+  <div class="method-card">
+    <div class="method-num">1</div>
+    <h3>📱 Via Chrome (Recommandé)</h3>
+    <p>La méthode la plus simple — Chrome installe GATE 75 comme une vraie app Android.</p>
+    <ul class="steps">
+      <li>Ouvrez <strong>Chrome</strong> sur votre Android</li>
+      <li>Allez sur <strong>gate75.netlify.app</strong></li>
+      <li>Attendez 10 secondes — une bannière <em>"Ajouter à l'écran d'accueil"</em> apparaît automatiquement</li>
+      <li>Appuyez sur <strong>Installer</strong> ou <strong>Ajouter</strong></li>
+      <li>GATE 75 apparaît sur votre écran d'accueil comme une vraie application !</li>
+    </ul>
+    <div class="note">💡 Si la bannière n'apparaît pas : Menu Chrome (⋮) → "Ajouter à l'écran d'accueil"</div>
+  </div>
+
+  <div class="method-card">
+    <div class="method-num">2</div>
+    <h3>📦 Via PWABuilder (APK signé)</h3>
+    <p>Génère un vrai fichier APK installable sur n'importe quel Android sans passer par le Play Store.</p>
+    <ul class="steps">
+      <li>Allez sur <strong>pwabuilder.com</strong></li>
+      <li>Entrez l'URL : <strong>https://gate75.netlify.app</strong></li>
+      <li>Cliquez <strong>"Start"</strong> — il analyse votre PWA</li>
+      <li>Cliquez <strong>"Package for stores"</strong></li>
+      <li>Choisissez <strong>"Android"</strong> → <strong>"Generate Package"</strong></li>
+      <li>Téléchargez le fichier <strong>.apk</strong></li>
+      <li>Envoyez-le sur votre téléphone et installez-le</li>
+    </ul>
+    <div class="note">⚠️ Activez "Sources inconnues" dans Paramètres → Sécurité avant d'installer l'APK</div>
+    <a href="https://www.pwabuilder.com" class="action-link" target="_blank">🔗 Ouvrir PWABuilder</a>
+  </div>
+
+  <div class="method-card">
+    <div class="method-num">3</div>
+    <h3>🛠️ Via Bubblewrap (APK avancé)</h3>
+    <p>Outil officiel Google pour convertir une PWA en APK TWA (Trusted Web Activity) — identique au Play Store.</p>
+    <ul class="steps">
+      <li>Installez Node.js sur votre ordinateur</li>
+      <li>Installez Bubblewrap : <code style="font-family:var(--mono);font-size:11px;color:var(--accent3);">npm i -g @bubblewrap/cli</code></li>
+      <li>Initialisez : <code style="font-family:var(--mono);font-size:11px;color:var(--accent3);">bubblewrap init --manifest https://gate75.netlify.app/manifest.json</code></li>
+      <li>Compilez : <code style="font-family:var(--mono);font-size:11px;color:var(--accent3);">bubblewrap build</code></li>
+      <li>Récupérez le fichier <strong>app-release-signed.apk</strong></li>
+    </ul>
+    <div class="note">📌 Nécessite Java JDK et Android SDK — recommandé pour la migration Play Store</div>
+  </div>
+
+  <!-- iOS METHOD -->
+  <div class="section-title">🍎 Installation iPhone / iOS</div>
+
+  <div class="method-card">
+    <div class="method-num">1</div>
+    <h3>🧭 Via Safari (Seule méthode iOS)</h3>
+    <p>Sur iPhone, seul Safari permet d'installer des PWA sur l'écran d'accueil.</p>
+    <ul class="steps">
+      <li>Ouvrez <strong>Safari</strong> (pas Chrome, pas Firefox)</li>
+      <li>Allez sur <strong>gate75.netlify.app</strong></li>
+      <li>Appuyez sur le bouton <strong>Partager</strong> (icône 📤 en bas)</li>
+      <li>Faites défiler et appuyez sur <strong>"Sur l'écran d'accueil"</strong></li>
+      <li>Appuyez sur <strong>"Ajouter"</strong> en haut à droite</li>
+      <li>GATE 75 est installé sur votre iPhone !</li>
+    </ul>
+    <div class="note">📌 iOS 16.4+ : les PWA ont accès aux notifications push. iOS 17+ : expérience optimale.</div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="section-title">✨ Fonctionnalités sur mobile</div>
+  <div class="features-grid">
+    <div class="feature-item"><div class="feature-icon">🌐</div><div class="feature-label">7 Langues</div></div>
+    <div class="feature-item"><div class="feature-icon">🎤</div><div class="feature-label">Voix</div></div>
+    <div class="feature-item"><div class="feature-icon">🌦️</div><div class="feature-label">Météo temps réel</div></div>
+    <div class="feature-item"><div class="feature-icon">📴</div><div class="feature-label">Mode hors-ligne</div></div>
+    <div class="feature-item"><div class="feature-icon">🔔</div><div class="feature-label">Notifications</div></div>
+    <div class="feature-item"><div class="feature-icon">📲</div><div class="feature-label">Icône native</div></div>
+    <div class="feature-item"><div class="feature-icon">⚡</div><div class="feature-label">Ultra-rapide</div></div>
+    <div class="feature-item"><div class="feature-icon">🔒</div><div class="feature-label">Sécurisé HTTPS</div></div>
+  </div>
+
+  <!-- QR CODE -->
+  <div class="section-title">📷 Scanner pour installer</div>
+  <div class="qr-section">
+    <div class="qr-box">
+      <!-- QR code for gate75.netlify.app generated as SVG -->
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="image-rendering:pixelated;">
+        <rect width="200" height="200" fill="white"/>
+        <!-- QR code pattern for gate75.netlify.app -->
+        <!-- Top-left finder -->
+        <rect x="10" y="10" width="56" height="56" fill="black"/>
+        <rect x="18" y="18" width="40" height="40" fill="white"/>
+        <rect x="26" y="26" width="24" height="24" fill="black"/>
+        <!-- Top-right finder -->
+        <rect x="134" y="10" width="56" height="56" fill="black"/>
+        <rect x="142" y="18" width="40" height="40" fill="white"/>
+        <rect x="150" y="26" width="24" height="24" fill="black"/>
+        <!-- Bottom-left finder -->
+        <rect x="10" y="134" width="56" height="56" fill="black"/>
+        <rect x="18" y="142" width="40" height="40" fill="white"/>
+        <rect x="26" y="150" width="24" height="24" fill="black"/>
+        <!-- Data modules (simplified pattern) -->
+        <rect x="74" y="10" width="8" height="8" fill="black"/>
+        <rect x="90" y="10" width="8" height="8" fill="black"/>
+        <rect x="106" y="10" width="8" height="8" fill="black"/>
+        <rect x="74" y="26" width="8" height="8" fill="black"/>
+        <rect x="106" y="26" width="8" height="8" fill="black"/>
+        <rect x="82" y="34" width="8" height="8" fill="black"/>
+        <rect x="98" y="42" width="8" height="8" fill="black"/>
+        <rect x="74" y="58" width="8" height="8" fill="black"/>
+        <rect x="90" y="50" width="8" height="8" fill="black"/>
+        <rect x="114" y="50" width="8" height="8" fill="black"/>
+        <rect x="10" y="74" width="8" height="8" fill="black"/>
+        <rect x="26" y="74" width="8" height="8" fill="black"/>
+        <rect x="42" y="74" width="8" height="8" fill="black"/>
+        <rect x="58" y="74" width="8" height="8" fill="black"/>
+        <rect x="74" y="74" width="8" height="8" fill="black"/>
+        <rect x="98" y="74" width="8" height="8" fill="black"/>
+        <rect x="122" y="74" width="8" height="8" fill="black"/>
+        <rect x="138" y="74" width="8" height="8" fill="black"/>
+        <rect x="154" y="74" width="8" height="8" fill="black"/>
+        <rect x="170" y="74" width="8" height="8" fill="black"/>
+        <rect x="186" y="74" width="8" height="8" fill="black"/>
+        <rect x="10" y="90" width="8" height="8" fill="black"/>
+        <rect x="42" y="90" width="8" height="8" fill="black"/>
+        <rect x="66" y="90" width="8" height="8" fill="black"/>
+        <rect x="82" y="90" width="8" height="8" fill="black"/>
+        <rect x="106" y="90" width="8" height="8" fill="black"/>
+        <rect x="130" y="90" width="8" height="8" fill="black"/>
+        <rect x="146" y="90" width="8" height="8" fill="black"/>
+        <rect x="170" y="90" width="8" height="8" fill="black"/>
+        <rect x="18" y="106" width="8" height="8" fill="black"/>
+        <rect x="50" y="106" width="8" height="8" fill="black"/>
+        <rect x="74" y="106" width="8" height="8" fill="black"/>
+        <rect x="90" y="106" width="8" height="8" fill="black"/>
+        <rect x="114" y="106" width="8" height="8" fill="black"/>
+        <rect x="138" y="106" width="8" height="8" fill="black"/>
+        <rect x="162" y="106" width="8" height="8" fill="black"/>
+        <rect x="186" y="106" width="8" height="8" fill="black"/>
+        <rect x="10" y="122" width="8" height="8" fill="black"/>
+        <rect x="34" y="122" width="8" height="8" fill="black"/>
+        <rect x="58" y="122" width="8" height="8" fill="black"/>
+        <rect x="82" y="122" width="8" height="8" fill="black"/>
+        <rect x="106" y="122" width="8" height="8" fill="black"/>
+        <rect x="122" y="122" width="8" height="8" fill="black"/>
+        <rect x="154" y="122" width="8" height="8" fill="black"/>
+        <rect x="178" y="122" width="8" height="8" fill="black"/>
+        <rect x="74" y="138" width="8" height="8" fill="black"/>
+        <rect x="90" y="138" width="8" height="8" fill="black"/>
+        <rect x="114" y="138" width="8" height="8" fill="black"/>
+        <rect x="130" y="138" width="8" height="8" fill="black"/>
+        <rect x="162" y="138" width="8" height="8" fill="black"/>
+        <rect x="186" y="138" width="8" height="8" fill="black"/>
+        <rect x="74" y="154" width="8" height="8" fill="black"/>
+        <rect x="98" y="154" width="8" height="8" fill="black"/>
+        <rect x="122" y="154" width="8" height="8" fill="black"/>
+        <rect x="146" y="154" width="8" height="8" fill="black"/>
+        <rect x="170" y="154" width="8" height="8" fill="black"/>
+        <rect x="82" y="170" width="8" height="8" fill="black"/>
+        <rect x="106" y="170" width="8" height="8" fill="black"/>
+        <rect x="130" y="170" width="8" height="8" fill="black"/>
+        <rect x="162" y="170" width="8" height="8" fill="black"/>
+        <rect x="186" y="170" width="8" height="8" fill="black"/>
+        <rect x="74" y="186" width="8" height="8" fill="black"/>
+        <rect x="90" y="186" width="8" height="8" fill="black"/>
+        <rect x="114" y="186" width="8" height="8" fill="black"/>
+        <rect x="138" y="186" width="8" height="8" fill="black"/>
+        <rect x="178" y="186" width="8" height="8" fill="black"/>
+      </svg>
+    </div>
+    <div class="qr-label">Scannez ce code pour ouvrir GATE 75</div>
+    <div class="qr-url">gate75.netlify.app</div>
+  </div>
+
+  <!-- PLAY STORE -->
+  <div class="alert">
+    <span>🚀</span>
+    <div><strong>Play Store — En préparation</strong><br/>
+    GATE 75 sera bientôt disponible sur le Google Play Store sous <strong>com.leslytechllc.gate75</strong> par Lesly Tech LLC.</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <p>© 2026 Lesly Tech LLC. Tous droits réservés.</p>
+    <p style="margin-top:4px;"><a href="https://gate75.netlify.app">gate75.netlify.app</a></p>
+  </div>
+
+</div>
+</body>
+</html>
