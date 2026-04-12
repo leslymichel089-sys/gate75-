@@ -1,0 +1,65 @@
+{
+  "name": "GATE 75 — IA Créatrice de Prompts",
+  "short_name": "GATE 75",
+  "description": "IA multilingue ultra-puissante créatrice de prompts et de codes complets. Par Lesly Tech LLC.",
+  "start_url": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "any",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "scope": "/",
+  "lang": "fr",
+  "categories": ["productivity", "utilities", "developer"],
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "GATE 75 Mobile"
+    },
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "GATE 75 Desktop"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nouveau prompt",
+      "short_name": "Nouveau",
+      "url": "/?new=1",
+      "description": "Créer un nouveau prompt",
+      "icons": [{"src": "icon-192.png", "sizes": "192x192"}]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.leslytechllc.gate75",
+      "id": "com.leslytechllc.gate75"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 480
+  }
+}
